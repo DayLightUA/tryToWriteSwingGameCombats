@@ -9,13 +9,13 @@ public class Character {
     private String nickName;
     private Race race;
     private Profession profession;
-    private long maxHP;
-    private long HP;
-    private long maxMP;
-    private long MP;
+    private int maxHP;
+    private Integer HP;
+    private int maxMP;
+    private Integer MP;
     private static final long HPLevelBonus=10;
     private static final long MPLevelBonus=2;
-    private long level = 1;
+    private int level = 1;
     private int experience = 0;
     private int experienceNextLevel = 100;
     private boolean isBot;
@@ -25,9 +25,9 @@ public class Character {
         this.nickName = nickName;
         this.race = race;
         this.profession = profession;
-        this.maxHP = (long) (Math.random()*20)+100;
+        this.maxHP = (int) (Math.random()*20)+100;
         HP = maxHP;
-        this.maxMP = (long) (Math.random()*5)+25;
+        this.maxMP = (int) (Math.random()*5)+25;
         MP = maxMP;
     }
 
@@ -42,37 +42,37 @@ public class Character {
         }
     }
 
-    public void restore(int i){ //відновлення здоров'я та мани до максимальних (присутній чіткод для моментального відновлення)
-        if (i == 13){
-            HP=maxHP;
-            MP=maxMP;
-            System.out.println("HP = "+HP+"; MP = "+MP);
-        }
-        if (i==1){
-            System.out.println("Restoring...");
-            while (HP < maxHP || MP < maxMP){
-                try{
-                    Thread.sleep(10000);
-                }catch (InterruptedException ex){}
-                if (HP<(maxHP-3)) HP+=3;
-                if (MP<maxMP) MP++;
-                System.out.println("HP = "+HP+"; MP = "+MP);
-            }
-            HP = maxHP;
-        }
-        System.out.println("Character is restored!!!");
+    public void restore(int restorConstant){
+        if (restorConstant==Constants.RESTOR_AUTORESTOR) autorestor();
+        else if (restorConstant<Constants.RESTOR_ELIXIR_MARGE) useHPElixir(restorConstant);
+        else useMPElixir(restorConstant);
     }
+
+    private void autorestor() {
+        Thread restoringTread = new RestoringThread();
+        restoringTread.
+    }
+
+    private void useHPElixir(int restorConstant) {
+    }
+
+    private void useMPElixir(int restorConstant) {
+    }
+
+
+
+
 
     public long attack(){
         if (isBot) return randomAttack();
         else return playerAttack();
     }
 
-    private long playerAttack() {
+    private int playerAttack() {
         return 0;
     }
 
-    private long randomAttack() {
+    private int randomAttack() {
         return 0;
     }
 
@@ -99,11 +99,11 @@ public class Character {
         return isKilled;
     }
 
-    public long getLevel() {
+    public int getLevel() {
         return level;
     }
 
-    public long getTotalKills(){
+    public int getTotalKills(){
         return totalKills;
     }
 
