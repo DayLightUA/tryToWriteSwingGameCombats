@@ -1,5 +1,6 @@
 package bin;
 
+import GUIclasses.CharacterGUI;
 import Professions.Profession;
 import Races.Race;
 
@@ -18,10 +19,12 @@ public class Character {
     private int level = 1;
     private int experience = 0;
     private int experienceNextLevel = 100;
-    private boolean isBot;
+    private boolean isBot = false;
+    private CharacterGUI characterGUI;
 
-    public Character(boolean isBot, String nickName, Race race, Profession profession) {
-        this.isBot = isBot;
+    public Character(CharacterGUI characterGUI, String nickName, Race race, Profession profession) {
+        if (characterGUI == null)this.isBot = true;
+        else this.characterGUI = characterGUI;
         this.nickName = nickName;
         this.race = race;
         this.profession = profession;
@@ -60,7 +63,9 @@ public class Character {
     }
 
     public void setLevel(long level){
-        totalKills =(int) level*3-2;
+        int maxExp = experienceNextLevel;
+        for (int i = this.level; i<=level; i++) maxExp*=2;
+        experience = maxExp-1;
         for (int i=0; i<level; i++){
             levelUp();
         }
@@ -72,6 +77,14 @@ public class Character {
 
     public String getNickName() {
         return nickName;
+    }
+
+    public int getMaxHP() {
+        return maxHP;
+    }
+
+    public int getMaxMP() {
+        return maxMP;
     }
 
     @Override
@@ -128,22 +141,22 @@ public class Character {
 
     }
 
-    private int calculateDamage(AttackData, DefenceData){
+    private int calculateDamage(AttackData myAttack, DefenceData myDefence){
 
     }
 
 
     private int takeAttackType(){
-
+        return characterGUI.getAttackType();
     }
     private int takeAttackPosition(){
-
+        return characterGUI.getAttackPosition();
     }
     private int takeDefType(){
-
+        return characterGUI.getDefenceType();
     }
     private int takeDefPosition(){
-
+        return characterGUI.getDefencePosition();
     }
 
 
