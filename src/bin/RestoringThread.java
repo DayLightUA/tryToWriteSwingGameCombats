@@ -1,8 +1,5 @@
 package bin;
 
-/**
- * Created by DayLightUA on 24.05.2018.
- */
 public class RestoringThread extends Thread {
 
     private Character character;

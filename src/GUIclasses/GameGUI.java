@@ -3,9 +3,6 @@ package GUIclasses;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Created by DayLightUA on 24.05.2018.
- */
 public class GameGUI {
     private static GameGUI instanceOfGame;
 

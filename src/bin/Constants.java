@@ -1,8 +1,5 @@
 package bin;
 
-/**
- * Created by DayLightUA on 24.05.2018.
- */
 public class Constants {
 
     public static final int RESTOR_SMALL_HP_ELIXIR = 1;

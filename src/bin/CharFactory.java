@@ -6,9 +6,6 @@ import Races.Human;
 import Races.Orc;
 import Races.Race;
 
-/**
- * Created by DayLightUA on 24.05.2018.
- */
 public class CharFactory {
     private String[] names = new String[]{"Mykola", "Vasyl",
             "Oleh", "Roman", "Yura", "Dmytro", "Ivan", "Evhen", "Stepan", "Petro"};

@@ -31,11 +31,11 @@ public class Character {
         MP = maxMP;
     }
 
-    public void levelUp(){ //збільшує рівень та параметри якщо досягнуто певну кількість кілів
+    public void levelUp(){
         if (experience>experienceNextLevel) {
             experienceNextLevel*=2;
-            maxHP+=(HPLevelBonus+(long)(Math.random()*5 -2))*level;
-            maxMP+=(MPLevelBonus+(long)(Math.random()*3 -1))*level;
+            maxHP+=(HPLevelBonus+(int)(Math.random()*5 -2))*level;
+            maxMP+=(MPLevelBonus+(int)(Math.random()*3 -1))*level;
             level++;
             HP = maxHP;
             MP = maxMP;
@@ -115,6 +115,7 @@ public class Character {
         return myAttack;
     }
     private int calculateAttackPoints(int attackType, int attackPosition) {
+
     }
     private int randomAttackType() {
         return (int)Math.random()*(Constants.ATTACK_TYPES);
@@ -124,6 +125,18 @@ public class Character {
     }
 
     private int calculateDefencePoints(){
+
+    }
+
+    private int calculateDamage(AttackData, DefenceData){
+
+    }
+
+
+    private int takeAttackType(){
+
+    }
+    private int takeAttackPosition(){
 
     }
     private int takeDefType(){
