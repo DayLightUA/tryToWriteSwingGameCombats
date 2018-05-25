@@ -29,9 +29,9 @@ public class Character {
         this.race = race;
         this.profession = profession;
         this.maxHP = (int) (Math.random()*20)+100;
-        HP = maxHP;
         this.maxMP = (int) (Math.random()*5)+25;
-        MP = maxMP;
+        characterGUI.setMaxHelthManaPoints(maxHP, maxMP);
+        characterGUI.setHelthManaPoints(HP = maxHP, MP = maxMP);
     }
 
     public void levelUp(){
@@ -52,12 +52,15 @@ public class Character {
 
     public AttackData myAttack(){
         if (isBot) return playerAttack(randomAttackType(), randomAttackPosition());
-        else return playerAttack(takeAttackType(), takeAttackPosition());
+        else return playerAttack(characterGUI.getAttackType(), characterGUI.getAttackPosition());
     }
 
     public DefenceData takeAttackFromEnemy(AttackData enemyAttack){
         DefenceData myDefence = new DefenceData();
-        myDefence.setDefenceParametrs(calculateDefencePoints(), takeDefType(), takeDefPosition());
+        int defenceType = characterGUI.getDefenceType();
+        int defencePosition = characterGUI.getDefencePosition();
+        int defencePoints = calculateDefencePoints(defenceType, defencePosition)
+        myDefence.setDefenceParametrs(defencePoints, defenceType, defencePosition);
         calculateDamage(enemyAttack, myDefence);
         return myDefence;
     }
@@ -137,7 +140,7 @@ public class Character {
         return (int)Math.random()*(Constants.ATTACK_POSITIONS);
     }
 
-    private int calculateDefencePoints(){
+    private int calculateDefencePoints(int defenceType, int defencePosition){
 
     }
 
@@ -145,19 +148,6 @@ public class Character {
 
     }
 
-
-    private int takeAttackType(){
-        return characterGUI.getAttackType();
-    }
-    private int takeAttackPosition(){
-        return characterGUI.getAttackPosition();
-    }
-    private int takeDefType(){
-        return characterGUI.getDefenceType();
-    }
-    private int takeDefPosition(){
-        return characterGUI.getDefencePosition();
-    }
 
 
 

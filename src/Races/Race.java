@@ -7,5 +7,5 @@ public interface Race{
     long useMainSkill(long level);
     Profession[] getProfessions();
     String getName();
-
+    String getImgLink();
 }

@@ -4,4 +4,5 @@ public interface Profession {
 
     long[] useProfSkill(long level);
     String getProfName();
+    String getImgLink();
 }
