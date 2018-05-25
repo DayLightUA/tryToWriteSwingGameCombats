@@ -6,13 +6,13 @@ import Races.Race;
 import javax.swing.*;
 import java.awt.*;
 
-public class CharacterGUI extends JPanel{
+public class CharacterPanel extends JPanel{
 
     private Image raceImg;
     private Image professionImg;
 
 
-    public CharacterGUI(String nickName, Race race, Profession profession) {
+    public CharacterPanel(String nickName, Race race, Profession profession) {
         super(new BorderLayout());
         raceImg = Toolkit.getDefaultToolkit().createImage(race.getImgLink());
         professionImg = Toolkit.getDefaultToolkit().createImage(profession.getImgLink());

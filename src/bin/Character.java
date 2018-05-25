@@ -1,6 +1,6 @@
 package bin;
 
-import GUIclasses.CharacterGUI;
+import GUIclasses.CharacterPanel;
 import Professions.Profession;
 import Races.Race;
 
@@ -20,9 +20,9 @@ public class Character {
     private int experience = 0;
     private int experienceNextLevel = 100;
     private boolean isBot = false;
-    private CharacterGUI characterGUI;
+    private CharacterPanel characterGUI;
 
-    public Character(CharacterGUI characterGUI, String nickName, Race race, Profession profession) {
+    public Character(CharacterPanel characterGUI, String nickName, Race race, Profession profession) {
         if (characterGUI == null)this.isBot = true;
         else this.characterGUI = characterGUI;
         this.nickName = nickName;
@@ -59,7 +59,7 @@ public class Character {
         DefenceData myDefence = new DefenceData();
         int defenceType = characterGUI.getDefenceType();
         int defencePosition = characterGUI.getDefencePosition();
-        int defencePoints = calculateDefencePoints(defenceType, defencePosition)
+        int defencePoints = calculateDefencePoints(defenceType, defencePosition);
         myDefence.setDefenceParametrs(defencePoints, defenceType, defencePosition);
         calculateDamage(enemyAttack, myDefence);
         return myDefence;

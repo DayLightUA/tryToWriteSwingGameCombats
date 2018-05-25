@@ -1,5 +1,6 @@
 package bin;
 
+import GUIclasses.CharacterPanel;
 import Professions.Profession;
 import Races.Elf;
 import Races.Human;
@@ -7,29 +8,32 @@ import Races.Orc;
 import Races.Race;
 
 public class CharFactory {
-    private String[] names = new String[]{"Mykola", "Vasyl",
+    private static String[] names = new String[]{"Mykola", "Vasyl",
             "Oleh", "Roman", "Yura", "Dmytro", "Ivan", "Evhen", "Stepan", "Petro"};
 
-    private String nickName;
-    private Race race;
-    private Profession profession;
+    private static String nickName;
+    private static Race race;
+    private static Profession profession;
 
-    public Character createCharacter(boolean isBot){
+    public static Character createCharacter(boolean isBot){
+        CharacterPanel characterPanel;
         if (!isBot){
             readAllParamFromGUI();
+            characterPanel = new CharacterPanel(nickName, race, profession);
         }else{
-            this.nickName = names[(int)(Math.random()*10)];
+            nickName = names[(int)(Math.random()*10)];
             race = randomRace();
             profession = randomProf();
+            characterPanel = null;
         }
-        return new Character(isBot, nickName, race, profession);
+        return new Character(characterPanel, nickName, race, profession);
     }
 
-    private Profession randomProf() {
+    private static Profession randomProf() {
         return race.getProfessions()[(int)Math.random()*race.getProfessions().length];
     }
 
-    private Race randomRace(){
+    private static Race randomRace(){
         switch ((int) Math.random()*3){
             case 0: return new Human();
             case 1: return  new Orc();
@@ -38,6 +42,6 @@ public class CharFactory {
         }
     }
 
-    private void readAllParamFromGUI() {
+    private static void readAllParamFromGUI() {
     }
 }

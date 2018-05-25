@@ -1,5 +1,8 @@
 package GUIclasses;
 
+import bin.CharFactory;
+import bin.Character;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -10,9 +13,8 @@ public class GameGUI {
     private JPanel mainPanel;
     private JPanel topMenuPanel;
     private JPanel characterPanel;
-    private JPanel enemysListPanel;
-    private JPanel choosedEnemyPanel;
     private JPanel chatPanel;
+    private Character myCharacter;
 
     private GameGUI(){}
 
@@ -22,24 +24,25 @@ public class GameGUI {
     }
 
     public void go() {
+        initCharacter();
         initGUI();
 
 
+    }
+
+    private void initCharacter() {
+        myCharacter = CharFactory.createCharacter(false);
     }
 
     private void initGUI() {
         mainFrame = new JFrame("SwingCombats");
         mainPanel = new JPanel(new BorderLayout());
         topMenuPanel = new JPanel();
-        characterPanel = new JPanel();
-        enemysListPanel = new JPanel();
-        choosedEnemyPanel = new JPanel();
+        characterPanel = myCharacter.getCharPanel();
         chatPanel = new JPanel();
 
         mainPanel.add(topMenuPanel, BorderLayout.NORTH);
-        mainPanel.add(characterPanel, BorderLayout.WEST);
-        mainPanel.add(enemysListPanel, BorderLayout.CENTER);
-        mainPanel.add(choosedEnemyPanel, BorderLayout.EAST);
+        mainPanel.add(characterPanel, BorderLayout.CENTER);
         mainPanel.add(chatPanel, BorderLayout.SOUTH);
 
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
