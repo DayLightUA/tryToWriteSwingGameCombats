@@ -5,14 +5,34 @@ package bin;
  */
 public class Constants {
 
-    public static final int RESTOR_SMALL_HP_ELIXIR = 701;
-    public static final int RESTOR_MIDLE_HP_ELIXIR = 702;
-    public static final int RESTOR_BIG_HP_ELIXIR = 703;
-    public static final int RESTOR_FULL_HP_ELIXIR = 704;
-    public static final int RESTOR_ELIXIR_MARGE = 704;
-    public static final int RESTOR_SMALL_MP_ELIXIR = 711;
-    public static final int RESTOR_MIDLE_MP_ELIXIR = 712;
-    public static final int RESTOR_BIG_MP_ELIXIR = 713;
-    public static final int RESTOR_FULL_MP_ELIXIR = 714;
-    public static final int RESTOR_AUTORESTOR = 799;
+    public static final int RESTOR_SMALL_HP_ELIXIR = 1;
+    public static final int RESTOR_MIDLE_HP_ELIXIR = 2;
+    public static final int RESTOR_BIG_HP_ELIXIR = 3;
+    public static final int RESTOR_FULL_HP_ELIXIR = 4;
+
+    public static final int RESTOR_SMALL_MP_ELIXIR = -1;
+    public static final int RESTOR_MIDLE_MP_ELIXIR = -2;
+    public static final int RESTOR_BIG_MP_ELIXIR = -3;
+    public static final int RESTOR_FULL_MP_ELIXIR = -4;
+
+    public static final int RESTOR_AUTORESTOR = 0;
+
+    public static final int SMALL_ELIXIR_POINTS = 100;
+    public static final int MIDLE_ELIXIR_POINTS = 200;
+    public static final int BIG_ELIXIR_POINTS = 500;
+
+
+
+
+    public static final int HEAD_POSITION = 0;
+    public static final int BODY_POSITION = 1;
+    public static final int GROIN_POSITION = 2;
+    public static final int FEETS_POSITION = 3;
+    public static final int ATTACK_POSITIONS = 4;
+
+
+    public static final int FISICAL_TYPE = 0;
+    public static final int MAGIC_TYPE = 1;
+    public static final int ATTACK_TYPES = 2;
+
 }

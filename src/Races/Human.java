@@ -14,11 +14,6 @@ public class Human implements Race{
         return Math.round(Math.random()*(12+level));
     }
 
-    @Override
-    public Profession[] getProf() {
-        return professions;
-    }
-
     public Profession[] getProfessions() {
         return professions;
     }

@@ -5,7 +5,7 @@ import Professions.Profession;
 public interface Race{
 
     long useMainSkill(long level);
-    Profession[] getProf();
+    Profession[] getProfessions();
     String getName();
 
 }

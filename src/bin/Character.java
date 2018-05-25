@@ -42,42 +42,21 @@ public class Character {
         }
     }
 
-    public void restore(int restorConstant){
-        if (restorConstant==Constants.RESTOR_AUTORESTOR) autorestor();
-        else if (restorConstant<Constants.RESTOR_ELIXIR_MARGE) useHPElixir(restorConstant);
-        else useMPElixir(restorConstant);
+    public void restore(int restoreConstant){
+        if (restoreConstant==Constants.RESTOR_AUTORESTOR) autorestor();
+        else useElixir(restoreConstant);
     }
 
-    private void autorestor() {
-        Thread restoringTread = new RestoringThread();
-        restoringTread.
+    public AttackData myAttack(){
+        if (isBot) return playerAttack(randomAttackType(), randomAttackPosition());
+        else return playerAttack(takeAttackType(), takeAttackPosition());
     }
 
-    private void useHPElixir(int restorConstant) {
-    }
-
-    private void useMPElixir(int restorConstant) {
-    }
-
-
-
-
-
-    public long attack(){
-        if (isBot) return randomAttack();
-        else return playerAttack();
-    }
-
-    private int playerAttack() {
-        return 0;
-    }
-
-    private int randomAttack() {
-        return 0;
-    }
-
-    public void killsUp(){
-        totalKills++;
+    public DefenceData takeAttackFromEnemy(AttackData enemyAttack){
+        DefenceData myDefence = new DefenceData();
+        myDefence.setDefenceParametrs(calculateDefencePoints(), takeDefType(), takeDefPosition());
+        calculateDamage(enemyAttack, myDefence);
+        return myDefence;
     }
 
     public void setLevel(long level){
@@ -87,24 +66,8 @@ public class Character {
         }
     }
 
-
-    public boolean getAttack(long damage){ //Метод для отримання персонажем пошкодження нанесених ворогом (можна додати метод для захисних навиків)
-        boolean isKilled = false;
-        if (damage<HP){
-            HP-=damage;
-        }else{
-            HP = 0;
-            isKilled=true;
-        }
-        return isKilled;
-    }
-
     public int getLevel() {
         return level;
-    }
-
-    public int getTotalKills(){
-        return totalKills;
     }
 
     public String getNickName() {
@@ -118,5 +81,58 @@ public class Character {
                 "/level: "+level+"/ HP: "+HP+"/ MP: "+MP+"|";
         return result;
     }
+
+
+
+    private void autorestor() {
+        Thread restoringTread = new RestoringThread(this);
+        restoringTread.start();
+    }
+    private void useElixir(int restoreConstant) {
+        int restorePoints;
+        restorePoints = switchOfElixirSize(Math.abs(restoreConstant));
+        if (restoreConstant>0){
+            HP = ((HP+restorePoints)>maxHP ? maxHP : (HP + restorePoints));
+        } else {
+            MP = ((MP+restorePoints/2)>maxMP ? maxMP : (MP + restorePoints/2));
+        }
+    }
+    private int switchOfElixirSize(int restoreConstantAbs) {
+        switch (restoreConstantAbs){
+            case Constants.RESTOR_SMALL_HP_ELIXIR: return Constants.SMALL_ELIXIR_POINTS;
+            case Constants.RESTOR_MIDLE_HP_ELIXIR: return Constants.MIDLE_ELIXIR_POINTS;
+            case Constants.RESTOR_BIG_HP_ELIXIR: return Constants.BIG_ELIXIR_POINTS;
+            case Constants.RESTOR_FULL_HP_ELIXIR: return maxHP;
+            default: return 0;
+        }
+    }
+
+
+    private AttackData playerAttack(int attackType, int attackPosition) {
+        AttackData myAttack = new AttackData();
+        int attackPoints = calculateAttackPoints(attackType, attackPosition);
+        myAttack.setAttackParametrs(attackPoints, attackType, attackPosition);
+        return myAttack;
+    }
+    private int calculateAttackPoints(int attackType, int attackPosition) {
+    }
+    private int randomAttackType() {
+        return (int)Math.random()*(Constants.ATTACK_TYPES);
+    }
+    private int randomAttackPosition() {
+        return (int)Math.random()*(Constants.ATTACK_POSITIONS);
+    }
+
+    private int calculateDefencePoints(){
+
+    }
+    private int takeDefType(){
+
+    }
+    private int takeDefPosition(){
+
+    }
+
+
 
 }

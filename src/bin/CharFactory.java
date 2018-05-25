@@ -1,6 +1,9 @@
 package bin;
 
 import Professions.Profession;
+import Races.Elf;
+import Races.Human;
+import Races.Orc;
 import Races.Race;
 
 /**
@@ -14,13 +17,27 @@ public class CharFactory {
     private Race race;
     private Profession profession;
 
-    public void createCharacter(boolean isBot){
+    public Character createCharacter(boolean isBot){
         if (!isBot){
             readAllParamFromGUI();
         }else{
             this.nickName = names[(int)(Math.random()*10)];
-            randomRace();
-            randomProf();
+            race = randomRace();
+            profession = randomProf();
+        }
+        return new Character(isBot, nickName, race, profession);
+    }
+
+    private Profession randomProf() {
+        return race.getProfessions()[(int)Math.random()*race.getProfessions().length];
+    }
+
+    private Race randomRace(){
+        switch ((int) Math.random()*3){
+            case 0: return new Human();
+            case 1: return  new Orc();
+            case 2: return  new Elf();
+            default: return new Human();
         }
     }
 

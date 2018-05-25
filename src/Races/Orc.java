@@ -14,14 +14,11 @@ public class Orc implements Race{
         return Math.round(Math.random()*(12+level));
     }
 
+    @Override
     public Profession[] getProfessions() {
         return professions;
     }
 
-    @Override
-    public Profession[] getProf() {
-        return professions;
-    }
     @Override
     public String getName() {
         return name;
