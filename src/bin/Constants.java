@@ -24,7 +24,7 @@ public class Constants {
     public static final int HEAD_POSITION = 0;
     public static final int BODY_POSITION = 1;
     public static final int GROIN_POSITION = 2;
-    public static final int FEETS_POSITION = 3;
+    public static final int FEET_POSITION = 3;
     public static final int ATTACK_POSITIONS = 4;
 
 

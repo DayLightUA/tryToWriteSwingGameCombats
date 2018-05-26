@@ -31,19 +31,5 @@ public class CharacterPanel extends JPanel{
     public void setHelthManaPoints(Integer integer, Integer integer1) {
     }
 
-    public int getAttackType() {
-        return attackType;
-    }
 
-    public int getAttackPosition() {
-        return attackPosition;
-    }
-
-    public int getDefenceType() {
-        return defenceType;
-    }
-
-    public int getDefencePosition() {
-        return defencePosition;
-    }
 }
