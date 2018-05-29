@@ -2,7 +2,7 @@ package Professions;
 
 public interface Profession {
 
-    long[] useProfSkill(long level);
+    int[] useProfSkill(int level);
     String getProfName();
     String getImgLink();
     String getDefenceSkillName();

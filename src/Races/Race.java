@@ -4,7 +4,7 @@ import Professions.Profession;
 
 public interface Race{
 
-    long useMainSkill(long level);
+    int useMainSkill(int level);
     Profession[] getProfessions();
     String getName();
     String getImgLink();

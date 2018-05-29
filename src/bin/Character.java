@@ -141,7 +141,15 @@ public class Character {
     }
 
     private int calculateAttackTypePoints(int attackType) {
-        if (attackType == Constants.PHYSICAL_TYPE)
+        if (attackType == Constants.PHYSICAL_TYPE) return race.useMainSkill(level);
+        else {
+            int [] damagePointsAndMP = profession.useProfSkill(level);
+            if (damagePointsAndMP[1]>= MP){
+                MP -= damagePointsAndMP[0];
+                return damagePointsAndMP[0];
+            }
+            else return 0;
+        }
     }
 
     private int calculateDefencePoints(int defenceType, int defencePosition, int attackType, int attackPosition){
