@@ -63,9 +63,11 @@ public class Character {
         int defencePosition = actionPanel.getDefencePosition();
         int defencePoints = calculateDefencePoints(defenceType, defencePosition, enemyAttack.getAttackType(), enemyAttack.getWhereHit());
         myDefence.setDefenceParametrs(defencePoints, defenceType, defencePosition);
-        calculateDamage(enemyAttack, myDefence);
+        int damage = calculateDamage(enemyAttack, myDefence);
+        myDefence.setKilled(damageMe(damage));
         return myDefence;
     }
+
 
     public void setLevel(long level){
         int maxExp = experienceNextLevel;
@@ -133,9 +135,13 @@ public class Character {
         return myAttack;
     }
     private int calculateAttackPoints(int attackType, int attackPosition) {
-        int attackPositionMultipler = calculatePositionMultipler(attackPosition);
+        int attackPositionMultipler = calculateAttackPositionMultipler(attackPosition);
         int atackTypePoints = calculateAttackTypePoints(attackType);
         return atackTypePoints*attackPositionMultipler/10;
+    }
+
+    private int calculateAttackTypePoints(int attackType) {
+        if (attackType == Constants.PHYSICAL_TYPE)
     }
 
     private int calculateDefencePoints(int defenceType, int defencePosition, int attackType, int attackPosition){
@@ -151,11 +157,18 @@ public class Character {
         return (int)Math.random()*(Constants.ATTACK_POSITIONS);
     }
 
-    private int calculateDamage(AttackData myAttack, DefenceData myDefence){
-
+    private int calculateDamage(AttackData enemyAttack, DefenceData myDefence){
+        int damage = enemyAttack.getAttackPoints()-myDefence.getDefencePointsForAttackPosition();
+        if  (damage>=0) return damage;
+        else return 0;
     }
-
-
-
-
+    private boolean damageMe(int damage) {
+        if (HP>damage){
+            HP -= damage;
+            return false;
+        } else {
+            HP = 0;
+            return true;
+        }
+    }
 }
