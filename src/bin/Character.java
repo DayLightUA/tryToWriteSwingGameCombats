@@ -1,5 +1,6 @@
 package bin;
 
+import GUIclasses.ActionPanel;
 import GUIclasses.CharacterPanel;
 import Professions.Profession;
 import Races.Race;
@@ -21,6 +22,7 @@ public class Character {
     private int experienceNextLevel = 100;
     private boolean isBot = false;
     private CharacterPanel characterGUI;
+    private ActionPanel actionPanel;
 
     public Character(CharacterPanel characterGUI, String nickName, Race race, Profession profession) {
         if (characterGUI == null)this.isBot = true;
@@ -51,15 +53,15 @@ public class Character {
     }
 
     public AttackData myAttack(){
-        if (isBot) return playerAttack(randomAttackType(), randomAttackPosition());
-        else return playerAttack(characterGUI.getAttackType(), characterGUI.getAttackPosition());
+        if (isBot) return playerAttack(randomAttackDefenceType(), randomAttackDefencePosition());
+        else return playerAttack(actionPanel.getAttackType(), actionPanel.getAttackPosition());
     }
 
     public DefenceData takeAttackFromEnemy(AttackData enemyAttack){
         DefenceData myDefence = new DefenceData();
-        int defenceType = characterGUI.getDefenceType();
-        int defencePosition = characterGUI.getDefencePosition();
-        int defencePoints = calculateDefencePoints(defenceType, defencePosition);
+        int defenceType = actionPanel.getDefenceType();
+        int defencePosition = actionPanel.getDefencePosition();
+        int defencePoints = calculateDefencePoints(defenceType, defencePosition, enemyAttack.getAttackType(), enemyAttack.getWhereHit());
         myDefence.setDefenceParametrs(defencePoints, defenceType, defencePosition);
         calculateDamage(enemyAttack, myDefence);
         return myDefence;
@@ -131,17 +133,22 @@ public class Character {
         return myAttack;
     }
     private int calculateAttackPoints(int attackType, int attackPosition) {
-
+        int attackPositionMultipler = calculatePositionMultipler(attackPosition);
+        int atackTypePoints = calculateAttackTypePoints(attackType);
+        return atackTypePoints*attackPositionMultipler/10;
     }
-    private int randomAttackType() {
+
+    private int calculateDefencePoints(int defenceType, int defencePosition, int attackType, int attackPosition){
+        int defencePositionMultipler = calculateDefencePositionMultipler(defencePosition, attackPosition);
+        int defenceTypePoints = calculateDefenceTypePoints(defenceType, attackType);
+        return defencePositionMultipler*defenceTypePoints/10;
+    }
+
+    private int randomAttackDefenceType() {
         return (int)Math.random()*(Constants.ATTACK_TYPES);
     }
-    private int randomAttackPosition() {
+    private int randomAttackDefencePosition() {
         return (int)Math.random()*(Constants.ATTACK_POSITIONS);
-    }
-
-    private int calculateDefencePoints(int defenceType, int defencePosition){
-
     }
 
     private int calculateDamage(AttackData myAttack, DefenceData myDefence){

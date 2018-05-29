@@ -7,14 +7,14 @@ import java.io.Serializable;
  */
 public class DefenceData implements Serializable {
 
-    private int defencePoints;
+    private int defencePointsForAttackPosition;
     private int defenceType;
     private int whereDefence;
 
     private  boolean isKilled;
 
     public void setDefenceParametrs(int defencePoints, int defenceType, int whereDefence) {
-        this.defencePoints = defencePoints;
+        this.defencePointsForAttackPosition = defencePoints;
         this.defenceType = defenceType;
         this.whereDefence = whereDefence;
     }
@@ -23,8 +23,8 @@ public class DefenceData implements Serializable {
         isKilled = killed;
     }
 
-    public int getDefencePoints() {
-        return defencePoints;
+    public int getDefencePointsForAttackPosition() {
+        return defencePointsForAttackPosition;
     }
 
     public int getDefenceType() {

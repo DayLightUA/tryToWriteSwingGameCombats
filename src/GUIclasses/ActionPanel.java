@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 
 public class ActionPanel extends JPanel{
 
-    private JComboBox skillTypeSelektor;
+    private JComboBox strikeTypeSelektor;
     private JComboBox defenceTypeSelektor;
 
     private JPanel strikePositionPanel;
@@ -43,24 +43,44 @@ public class ActionPanel extends JPanel{
     private void initThis() {
         initThisParts();
         setLayout(new GridBagLayout());
-        add()
-        add(strikePositionSelektor);
-        add(strikePositionSelektor);
-        add(strikePositionSelektor);
+        add(strikePositionPanel);
+        add(defencePositionPanel);
+        add(strikeTypeSelektor);
+        add(defenceTypeSelektor);
+        goButton = new JButton("Go!!!");
+        goButton.addActionListener(goButtonListener);
+        add(goButton);
 
     }
 
     private void initThisParts() {
-        initSkillTypeSelector();
+        initStrikeTypeSelector();
         initDefenceTypeSelector();
-        initSkillPositionSelector();
+        initStrikePositionSelector();
         initDefencePositionSelector();
     }
 
-    private void initDefenceTypeSelector() {
+    private void initStrikeTypeSelector() {
+        String raceSkillType = race.getAttackSkillName()+" (";
+        if (race.getAttackSkillType() == Constants.PHYSICAL_TYPE) raceSkillType+= "Physical Type)";
+        else if (race.getAttackSkillType() == Constants.MAGIC_TYPE) raceSkillType+= "Magic Type)";
+        String professionSkillType = profession.getAttackSkillName()+" (";
+        if (profession.getAttackSkillType() == Constants.PHYSICAL_TYPE) raceSkillType+= "Physical Type)";
+        else if (profession.getAttackSkillType() == Constants.MAGIC_TYPE) raceSkillType+= "Magic Type)";
+        strikeTypeSelektor = new JComboBox(new String[]{raceSkillType, professionSkillType});
     }
 
-    private void initSkillPositionSelector() {
+    private void initDefenceTypeSelector() {
+        String raceSkillType = race.getDefenceSkillName()+" (";
+        if (race.getDefenceSkillType() == Constants.PHYSICAL_TYPE) raceSkillType+= "Physical Type)";
+        else if (race.getDefenceSkillType() == Constants.MAGIC_TYPE) raceSkillType+= "Magic Type)";
+        String professionSkillType = profession.getDefenceSkillName()+" (";
+        if (profession.getDefenceSkillType() == Constants.PHYSICAL_TYPE) raceSkillType+= "Physical Type)";
+        else if (profession.getDefenceSkillType() == Constants.MAGIC_TYPE) raceSkillType+= "Magic Type)";
+        defenceTypeSelektor = new JComboBox(new String[]{raceSkillType, professionSkillType});
+    }
+
+    private void initStrikePositionSelector() {
         headStrike = new JRadioButton("Head Strike:");
         headStrike.setMnemonic(Constants.HEAD_POSITION);
         bodyStrike = new JRadioButton("Body Strike:");
@@ -110,7 +130,7 @@ public class ActionPanel extends JPanel{
 
 
     public int getAttackType() {
-        return skillTypeSelektor.getSelectedIndex();
+        return strikeTypeSelektor.getSelectedIndex();
     }
 
     public int getAttackPosition() {

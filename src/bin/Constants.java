@@ -28,7 +28,7 @@ public class Constants {
     public static final int ATTACK_POSITIONS = 4;
 
 
-    public static final int FISICAL_TYPE = 0;
+    public static final int PHYSICAL_TYPE = 0;
     public static final int MAGIC_TYPE = 1;
     public static final int ATTACK_TYPES = 2;
 
