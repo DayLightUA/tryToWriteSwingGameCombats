@@ -140,6 +140,9 @@ public class Character {
         return atackTypePoints*attackPositionMultipler/10;
     }
 
+    private int calculateAttackPositionMultipler(int attackPosition) {
+    }
+
     private int calculateAttackTypePoints(int attackType) {
         if (attackType == Constants.PHYSICAL_TYPE) return race.useMainSkill(level);
         else {
