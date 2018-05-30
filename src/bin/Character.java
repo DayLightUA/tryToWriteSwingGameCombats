@@ -4,6 +4,11 @@ import GUIclasses.ActionPanel;
 import GUIclasses.CharacterPanel;
 import Professions.Profession;
 import Races.Race;
+import Items.Item;
+
+import javax.swing.*;
+import java.util.LinkedList;
+import java.util.List;
 
 
 public class Character {
@@ -23,6 +28,7 @@ public class Character {
     private boolean isBot = false;
     private CharacterPanel characterGUI;
     private ActionPanel actionPanel;
+    private List<Item> items = new LinkedList<>();
 
     public Character(CharacterPanel characterGUI, String nickName, Race race, Profession profession) {
         if (characterGUI == null)this.isBot = true;
@@ -68,46 +74,11 @@ public class Character {
         return myDefence;
     }
 
-
-    public void setLevel(long level){
-        int maxExp = experienceNextLevel;
-        for (int i = this.level; i<=level; i++) maxExp*=2;
-        experience = maxExp-1;
-        for (int i=0; i<level; i++){
-            levelUp();
-        }
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public int getMaxHP() {
-        return maxHP;
-    }
-
-    public int getMaxMP() {
-        return maxMP;
-    }
-
-    @Override
-    public String toString() {
-        String result = "NickName: "+nickName+"/ Race: "+ race.getName()+
-                "/ Profession: "+ profession.getProfName()+
-                "/level: "+level+"/ HP: "+HP+"/ MP: "+MP+"|";
-        return result;
-    }
-
-
-
     private void autorestor() {
         Thread restoringTread = new RestoringThread(this);
         restoringTread.start();
     }
+
     private void useElixir(int restoreConstant) {
         int restorePoints;
         restorePoints = switchOfElixirSize(Math.abs(restoreConstant));
@@ -127,7 +98,6 @@ public class Character {
         }
     }
 
-
     private AttackData playerAttack(int attackType, int attackPosition) {
         AttackData myAttack = new AttackData();
         int attackPoints = calculateAttackPoints(attackType, attackPosition);
@@ -141,6 +111,13 @@ public class Character {
     }
 
     private int calculateAttackPositionMultipler(int attackPosition) {
+        switch (attackPosition){
+            case Constants.HEAD_POSITION: return 13;
+            case Constants.BODY_POSITION: return 10;
+            case Constants.GROIN_POSITION: return 15;
+            case Constants.FEET_POSITION: return 12;
+            default: return 0;
+        }
     }
 
     private int calculateAttackTypePoints(int attackType) {
@@ -159,6 +136,23 @@ public class Character {
         int defencePositionMultipler = calculateDefencePositionMultipler(defencePosition, attackPosition);
         int defenceTypePoints = calculateDefenceTypePoints(defenceType, attackType);
         return defencePositionMultipler*defenceTypePoints/10;
+    }
+
+    private int calculateDefencePositionMultipler(int defencePosition, int attackPosition) {
+        if (defencePosition == attackPosition) return calculateAttackPositionMultipler(defencePosition);
+        else {
+            if (Math.abs(defencePosition-attackPosition)==1 || Math.abs(defencePosition-attackPosition)==4)
+                return calculateAttackPositionMultipler(defencePosition)/2;
+            else return 1;
+        }
+    }
+
+    private int calculateDefenceTypePoints(int defenceType, int attackType) {
+        int defencePoints = 1;
+        if (defenceType == Constants.PHYSICAL_TYPE) defencePoints = race.useDefenceSkill(level);
+        if (defenceType == Constants.MAGIC_TYPE) defencePoints = profession.useDefenceSkill(level);
+        if (defenceType==attackType) return defencePoints;
+        else return defencePoints/2;
     }
 
     private int randomAttackDefenceType() {
@@ -181,5 +175,38 @@ public class Character {
             HP = 0;
             return true;
         }
+    }
+
+
+    public void setLevel(long level){
+        int maxExp = experienceNextLevel;
+        for (int i = this.level; i<=level; i++) maxExp*=2;
+        experience = maxExp-1;
+        for (int i=0; i<level; i++){
+            levelUp();
+        }
+    }
+    public int getLevel() {
+        return level;
+    }
+    public String getNickName() {
+        return nickName;
+    }
+    public int getMaxHP() {
+        return maxHP;
+    }
+    public int getMaxMP() {
+        return maxMP;
+    }
+    @Override
+    public String toString() {
+        String result = "NickName: "+nickName+"/ Race: "+ race.getName()+
+                "/ Profession: "+ profession.getProfName()+
+                "/level: "+level+"/ HP: "+HP+"/ MP: "+MP+"|";
+        return result;
+    }
+
+    public JPanel getCharPanel() {
+        return characterGUI;
     }
 }

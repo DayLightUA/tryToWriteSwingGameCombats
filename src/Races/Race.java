@@ -12,4 +12,5 @@ public interface Race{
     int getDefenceSkillType();
     String getAttackSkillName();
     int getAttackSkillType();
+    int useDefenceSkill(int level);
 }

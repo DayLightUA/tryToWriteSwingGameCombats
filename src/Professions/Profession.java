@@ -9,5 +9,5 @@ public interface Profession {
     int getDefenceSkillType();
     String getAttackSkillName();
     int getAttackSkillType();
-
+    int useDefenceSkill(int level);
 }
