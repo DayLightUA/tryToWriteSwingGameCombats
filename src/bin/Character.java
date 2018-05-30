@@ -38,6 +38,10 @@ public class Character {
         this.profession = profession;
         this.maxHP = (int) (Math.random()*20)+100;
         this.maxMP = (int) (Math.random()*5)+25;
+        drawHPMP();
+    }
+
+    private void drawHPMP() {
         characterGUI.setMaxHelthManaPoints(maxHP, maxMP);
         characterGUI.setHelthManaPoints(HP = maxHP, MP = maxMP);
     }
@@ -71,6 +75,7 @@ public class Character {
         myDefence.setDefenceParametrs(defencePoints, defenceType, defencePosition);
         int damage = calculateDamage(enemyAttack, myDefence);
         myDefence.setKilled(damageMe(damage));
+        drawHPMP();
         return myDefence;
     }
 
@@ -206,7 +211,7 @@ public class Character {
         return result;
     }
 
-    public JPanel getCharPanel() {
+    public JPanel getCharacterPanel() {
         return characterGUI;
     }
 }

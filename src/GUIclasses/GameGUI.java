@@ -38,7 +38,7 @@ public class GameGUI {
         mainFrame = new JFrame("SwingCombats");
         mainPanel = new JPanel(new BorderLayout());
         topMenuPanel = new JPanel();
-        characterPanel = myCharacter.getCharPanel();
+        characterPanel = myCharacter.getCharacterPanel();
         chatPanel = new JPanel();
 
         mainPanel.add(topMenuPanel, BorderLayout.NORTH);

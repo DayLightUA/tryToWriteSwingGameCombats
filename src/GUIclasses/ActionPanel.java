@@ -145,4 +145,17 @@ public class ActionPanel extends JPanel{
         return defencePositionSelektor.getSelection().getMnemonic();
     }
 
+    public void setGoButtonActionListener(ActionListener actionListener){
+        ActionListener[] listeners = goButton.getActionListeners();
+        if (listeners.length>0){
+            for (int i = 0; i<listeners.length; i++){
+                if (listeners[i] != null) goButton.removeActionListener(listeners[i]);
+            }
+        }
+        goButton.addActionListener(actionListener);
+    }
+    public ActionListener getGoButtonActionListener(){
+        return goButton.getActionListeners()[0];
+    }
+
 }
