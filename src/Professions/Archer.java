@@ -1,19 +1,21 @@
 package Professions;
 
-public class Archer implements Profession{
-    private String profName = "Archer";
+public class Archer extends Profession{
 
-    public String getProfName() {
-        return profName;
+    private String profesionName = "Archer";
+    icon
+
+    @Override
+    public int[] useProfSkill(int level) {
+        int damage;
+        int needMP;
+        damage = (int) (level*(Math.random()*3-1)+Math.random()*10)+10;
+        needMP =(int) Math.round(((double) damage + (Math.random() * level * 2 - level)) / 10.0);
+        return new int[] {damage, needMP};
     }
 
     @Override
-    public long[] useProfSkill(long level) {
-        long damage;
-        long needMP;
-        damage = (long) (level*(Math.random()*3-1)+Math.random()*10)+10;
-        needMP = Math.round(((double) damage + (Math.random() * level * 2 - level)) / 10.0);
-        System.out.println("Aiming shot attak");
-        return new long[] {damage, needMP};
+    int useDefenceSkill(int level) {
+        return 0;
     }
 }

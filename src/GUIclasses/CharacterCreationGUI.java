@@ -8,7 +8,6 @@ import Races.Orc;
 import Races.Race;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,9 +21,8 @@ public class CharacterCreationGUI {
     private JTextField nickNameField;
     private JButton submitButton;
     private JButton cancelButton;
-
-    private List<Race> races;
-    private List<Profession> profession;
+    private ButtonGroup races;
+    private ButtonGroup professions;
 
     private boolean isSubmited;
     private boolean isClosed;

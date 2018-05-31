@@ -1,7 +1,7 @@
 package Professions;
 
 public class Gladiator implements Profession {
-    public String getProfName() {
+    public String getProfessionName() {
         return profName;
     }
 

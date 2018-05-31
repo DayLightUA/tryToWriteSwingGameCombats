@@ -206,7 +206,7 @@ public class Character {
     @Override
     public String toString() {
         String result = "NickName: "+nickName+"/ Race: "+ race.getName()+
-                "/ Profession: "+ profession.getProfName()+
+                "/ Profession: "+ profession.getProfessionName()+
                 "/level: "+level+"/ HP: "+HP+"/ MP: "+MP+"|";
         return result;
     }

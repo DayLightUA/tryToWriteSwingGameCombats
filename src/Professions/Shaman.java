@@ -1,7 +1,7 @@
 package Professions;
 
 public class Shaman implements Profession {
-    public String getProfName() {
+    public String getProfessionName() {
         return profName;
     }
 

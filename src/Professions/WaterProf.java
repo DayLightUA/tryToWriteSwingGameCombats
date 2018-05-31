@@ -12,7 +12,7 @@ public class WaterProf implements Profession {
         return new long[] {damage, needMP};
     }
 
-    public String getProfName() {
+    public String getProfessionName() {
         return profName;
     }
 }

@@ -1,7 +1,7 @@
 package Professions;
 
 public class Berserker implements Profession{
-    public String getProfName() {
+    public String getProfessionName() {
         return profName;
     }
 
