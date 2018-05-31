@@ -1,11 +1,13 @@
 package bin;
 
+import GUIclasses.CharacterCreationGUI;
 import GUIclasses.CharacterPanel;
 import Professions.Profession;
 import Races.Elf;
 import Races.Human;
 import Races.Orc;
 import Races.Race;
+
 
 public class CharFactory {
     private static String[] names = new String[]{"Mykola", "Vasyl",
@@ -43,5 +45,19 @@ public class CharFactory {
     }
 
     private static void readAllParamFromGUI() {
+        CharacterCreationGUI ccg = new CharacterCreationGUI();
+        ccg.go();
+        boolean haveParametres = false;
+        while (!haveParametres){
+            if (ccg.isSubmited()){
+                nickName = ccg.getNickName();
+                race = ccg.getRace();
+                profession = ccg.getProfession();
+                haveParametres = true;
+            } else if(ccg.isClosed()){
+                readAllParamFromGUI();
+                haveParametres = true;
+            }
+        }
     }
 }
