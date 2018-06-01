@@ -1,10 +1,11 @@
 package Professions;
 
 import bin.Constants;
+import bin.WithIconLink;
 
-public abstract class Profession {
+public abstract class Profession implements WithIconLink{
     String professionName;
-    String iconLink = "img//";
+    String iconLink;
     String defenceSkillName;
     int defenceSkillType = Constants.MAGIC_TYPE;
     String attackSkillName;
@@ -15,7 +16,7 @@ public abstract class Profession {
     public String getProfessionName(){
         return professionName;
     }
-    public String getImgLink(){
+    public String getIconLinks(){
         return iconLink;
     }
     public String getDefenceSkillName(){

@@ -4,23 +4,24 @@ import Professions.Profession;
 import Professions.Berserker;
 import Professions.Shaman;
 
-public class Orc implements Race{
-    private String name = "Orc";
-    private Profession[] professions = {new Berserker(), new Shaman()};
+public class Orc extends Race{
 
-    @Override
-    public long useMainSkill(long level) {
-        System.out.println("Axe attak");
-        return Math.round(Math.random()*(12+level));
+    public Orc() {
+        name = "Orc";
+        professions = new Profession[]{new Berserker(), new Shaman()};
+        imgLink += "img//imgOrc.jpg";
+        iconLink += "img//iconOrc.jpg";
+        attackSkillName = "";
+        defenceSkillName = "";
     }
 
     @Override
-    public Profession[] getProfessions() {
-        return professions;
+    public int useMainSkill(int level) {
+        return (int)Math.round(Math.random()*(12+level));
     }
 
     @Override
-    public String getName() {
-        return name;
+    int useDefenceSkill(int level) {
+        return ;
     }
 }
