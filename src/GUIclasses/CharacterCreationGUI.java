@@ -2,14 +2,10 @@ package GUIclasses;
 
 
 import Professions.Profession;
-import Races.Elf;
-import Races.Human;
-import Races.Orc;
 import Races.Race;
 import bin.WithIconLink;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,14 +32,26 @@ public class CharacterCreationGUI {
         creationFrame = new JFrame("Create the Character!!!");
         creationPanel = new JPanel();
         submitButton = new JButton("Submit!");
-        submitButton.addActionListener((AbstractAction) (e) -> {setSubmited();});
+        submitButton.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setSubmited();
+            }
+        });
         cancelButton = new JButton("Cancel");
-        cancelButton.addActionListener((AbstractAction) (e) -> {setClosed();});
+        cancelButton.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setClosed();
+            }
+        });
         buttonBox = Box.createHorizontalBox();
         buttonBox.add(submitButton);
         buttonBox.add(cancelButton);
         initRaces();
         initProfessions();
+        creationFrame.setSize(400, 600);
+        creationFrame.setVisible(true);
     }
 
     private void initRaces() {
@@ -80,6 +88,17 @@ public class CharacterCreationGUI {
         ((JButton)professionsBox.getComponent(0)).setSelected(true);
     }
 
+    private Profession[] takeProfessionsOfSelectedRace() {
+        Profession[] professions = null;
+        for (JButton raceButton: (JButton[]) racesBox.getComponents()){
+            if (raceButton.isSelected()){
+                Race race = races.get(raceButton.getMnemonic());
+                professions = race.getProfessions();
+            }
+        }
+        return professions;
+    }
+
     private JButton createButton(WithIconLink linkObj, int i) {
         ImageIcon noSelectButtonIcon = new ImageIcon(linkObj.getIconLink());
         ImageIcon selectButtonIcon = new ImageIcon(linkObj.getIconLink().replaceAll(".jpg", "Select.jpg"));
@@ -90,14 +109,36 @@ public class CharacterCreationGUI {
         return button;
     }
 
-    private Profession[] takeProfessionsOfSelectedRace() {
-        Profession[] professions = null;
-        for (JButton raceButton: (JButton[]) racesBox.getComponents()){
-            if (raceButton.isSelected()){
-                Race race = races.get(raceButton.getMnemonic());
-                professions = race.getProfessions();
-            }
+    private void setClosed() {
+        creationFrame.setVisible(false);
+        isClosed = true;
+        creationFrame.dispose();
+    }
+
+    private void setSubmited() {
+        if (nickNameField.getText()!=null) {
+            isSubmited = true;
+            creationFrame.setVisible(false);
         }
-        return professions;
+    }
+
+    public String getNickName() {
+        return nickNameField.getText();
+    }
+
+    public Race getRace() {
+        return races.get(racesBGroup.getSelection().getMnemonic());
+    }
+
+    public Profession getProfession() {
+        return professions.get(professionsBGroup.getSelection().getMnemonic());
+    }
+
+    public boolean isSubmited(){
+        return isSubmited;
+    }
+
+    public boolean isClosed(){
+        return isClosed;
     }
 }

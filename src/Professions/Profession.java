@@ -16,7 +16,7 @@ public abstract class Profession implements WithIconLink{
     public String getProfessionName(){
         return professionName;
     }
-    public String getIconLinks(){
+    public String getIconLink(){
         return iconLink;
     }
     public String getDefenceSkillName(){
